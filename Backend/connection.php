@@ -5,7 +5,7 @@ class DBconnection
     private $server = "localhost";
     private $username = "root";
     private $password = "";
-    private $database = "mutnakry";
+    private $database = "finaldb404";
 
     public function connect()
     {

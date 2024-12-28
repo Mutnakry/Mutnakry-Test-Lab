@@ -3,9 +3,9 @@ include './functions.php';
 
 $result = array("success" => 0, "error" => 0);
 
-// Debug incoming data
-if (isset($_POST['contactName']) && isset($_POST['contactNumber']) && isset($_POST['contactEmail'])) {
+if (isset($_POST['contactId']) && isset($_POST['contactName']) && isset($_POST['contactNumber']) && isset($_POST['contactEmail'])) {
     // Retrieve POST data
+    $contactId = $_POST['contactId'];
     $contactName = $_POST['contactName'];
     $contactNumber = $_POST['contactNumber'];
     $contactEmail = $_POST['contactEmail'];
@@ -13,18 +13,19 @@ if (isset($_POST['contactName']) && isset($_POST['contactNumber']) && isset($_PO
     // Define the table fields and values
     $fields = array('contactName', 'contactNumber', 'contactEmail');
     $values = array($contactName, $contactNumber, $contactEmail);
+
     $func = new functions();
 
-    // Call insert_data method to insert data into 'tblproduct'
-    $insert = $func->insert_data('tblcontact', $fields, $values);
+    // Call update_data method to update data in 'tblcontact'
+    $update = $func->update_data('tblcontact', $fields, $values, 'contactID', $contactId);
 
-    // Check if the insertion was successful
-    if ($insert == true) {
+    // Check if the update was successful
+    if ($update == true) {
         $result["success"] = 1;
-        $result["msg_success"] = "Product registered successfully";
+        $result["msg_success"] = "Contact updated successfully";
     } else {
         $result["error"] = 2;
-        $result["msg_error"] = "Failed to register product";
+        $result["msg_error"] = "Failed to update contact";
     }
 } else {
     $result["error"] = 1;
